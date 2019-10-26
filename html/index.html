@@ -11,25 +11,38 @@
 </head>
 <body>
 	<div id="overlay"></div>
-	<div class="search">
-		<button id="spinnerButton">Wheel</button>
-		<fieldset>
-			<legend>Category</legend>
-			<div class="toggle">
-				<label for="pub">Pub<input type="checkbox" name="type" value="pub" id="pub" checked="checked" /></label>
-				<label for="club">Club<input type="checkbox" name="type" value="club" id="club" /></label>
-				<label for="grub">Grub<input type="checkbox" name="type" value="grub" id="grub" /></label>
-				<label for="Suprise">Suprise</label>
-			</div>
-			<p class="status">Toggle is <span>auto width</span><span>full width</span>.</p>
-		</fieldset>
-	</div>
-	<div>
-		<center>
-			<div class="wheelSpinnerParents">
+	<center>
+		<div class="wheelSpinnerParents">
+			<div style="padding-top: 20px">
 				<div class="wheelSpinner" id="wheelSpinner"></div>
 			</div>
-		</center>
+		</div>
+	</center>
+	<div class="search">
+		<table class="optionField">
+			<thead><tr><td colspan="2" align="center"><h3 class="optionFieldHeading">Category:</h3></td></tr></thead>
+			<tr>
+				<td width="50%"><div class="toggle"><label for="pub" id="1">Pub<input type="checkbox" name="type" value="pub" id="pub" /></label></div></td>
+				<td><div class="toggle"><label for="club" id="2">Club<input type="checkbox" name="type" value="club" id="club" /></label></div></td>
+			</tr>
+			<tr>
+				<td><div class="toggle"><label for="grub" id="3">Grub<input type="checkbox" name="type" value="grub" id="grub" /></label></div></td>
+				<td><div class="toggleAll"><label for="all">Suprise<input type="checkbox" name="type" value="all" id="all"></label></div></td>
+			</tr>
+		</table>
+		<table class="optionField">
+			<thead><tr><td colspan="2" align="center"><h3 class="optionFieldHeading"><br>Distance:</h3></td></tr></thead>
+			<tr>
+				<td width="50%"><div class="toggleDist"><label for="1k" id="1k">1k<input type="radio" name="distance" value="1k" id="1k" /></label></div></td>
+				<td><div class="toggleDist"><label for="3k" id="2">3k<input type="radio" name="distance" value="3k" id="3k" /></label></div></td>
+			</tr>
+			<tr>
+				<td><div class="toggleDist"><label for="5k" id="3">5k<input type="radio" name="distance" value="5k" id="5k" /></label></div></td>
+				<td><div class="toggleDist"><label for="10k">10k<input type="radio" name="distance" value="10k" id="10k"></label></div></td>
+			</tr>
+		</table>
+	</div>
+	<div>
 		<div class="results" id="results">
 			<div>
 				<table width="100%">
@@ -46,7 +59,7 @@
 								<div id="subResults">
 									<table width="100%">
 										<tr>
-											<td align="center"><img src="img/Crown.png" style="max-width: 100%"></td>
+											<td align="center"><img src="img/Crown.png" style="max-width: 100%"><br><br></td>
 										</tr>
 										<tr>
 											<td><table width="100%">
@@ -73,41 +86,88 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		var displayed = false;
 		$("#overlay").slideUp(300);
-		document.getElementById("wheelSpinner").onclick = function() { if ($("#spinnerButton").attr("shown") == "true"){ $("#overlay").show('slide', { direction: "down" }, 1000);window.setTimeout(function () {location.reload();},1000) } else { document.getElementById("wheelSpinner").classList.toggle("rotate"); displayResults() }};
-		window.setTimeout(function () {$("#wheelSpinner").animate({maxHeight:"60vw",maxWidth:"60vw",width:"60vw",height:"60vw"},250);},700);
+		document.getElementById("wheelSpinner").onclick = function() { if (displayed){ $("#overlay").show('slide', { direction: "down" }, 1000);window.setTimeout(function () {location.reload();},1000) } else { document.getElementById("wheelSpinner").classList.toggle("rotate"); displayResults() }};
+		window.setTimeout(function () {$("#wheelSpinner").animate({maxHeight:"60vw",maxWidth:"60vw",width:"60vw",height:"60vw",marginTop:"12vh"},250);},700);
+		var clickCount = 0;
+		$(".toggle").click(function(){
+			clickCount++;
+			if (clickCount == 1){
+				if ($(this).hasClass("checked"))
+				{
+					$(this).removeClass("checked");
+				}
+				else
+				{
+					$(this).addClass("checked");
+					$(".toggleAll > label, .toggleAll > label > input, .toggleAll").removeClass("checked").prop("checked",false).removeClass("checked");
+				}
+			}
+			else
+			{
+				clickCount = 0;
+			}
+		});
+		$(".toggleDist").click(function(){
+			$(".toggleDist").removeClass("checked");
+			$(this).addClass("checked");
+		});
+		$(".toggleAll").click(function() {
+			clickCount++;
+			if (clickCount == 1){
+				if ($(this).hasClass("checked"))
+				{
+					$(this).removeClass("checked");
+				}
+				else
+				{
+					$(this).addClass("checked");
+				}
+			}
+			else
+			{
+				clickCount = 0;
+			}
+			$(".toggle > label#1, .toggle > label#1 > input, .toggle").prop("checked",false).removeClass("checked");
+			$(".toggle > label#2, .toggle > label#2 > input, .toggle").prop("checked",false).removeClass("checked");
+			$(".toggle > label#3, .toggle > label#3 > input, .toggle").prop("checked",false).removeClass("checked");
+		});
 		function displayResults(results = {})
 		{
 			//if (results != {})
 			//{
+				$(".search").slideUp();
 				if ($("#spinnerButton").attr("shown") != "true"){
-					$("#wheelSpinner").css({minwidth:0,minHeight:0,marginBottom:50}).animate({height:60,width:0,opacity:0.3},250);
+					$("#spinnerButton").attr("shown","true");
+					$("#wheelSpinner").css({minwidth:0,minHeight:0,marginBottom:50}).animate({height:60,width:0,opacity:0.3,marginTop:0},250);
 					$("#results, #subResults").hide();
 					$("#results").delay(900).fadeIn(1500);
 					$("#results").delay(100).animate({marginTop:0,marginTop:50,display:"block"},375);
 					$("#spinnerButton").delay(800).animate({opacity:0},200);
 					window.setTimeout(function () {
 						$("#spinnerButton").slideUp();
-						$("#wheelSpinner").removeClass("rotate").animate({opacity:1,marginBottom:0, height:100,width:100,minwidth:100,minHeight:100,maxHeight:100,maxWidth:100,paddingBottom:25},250);
+						$("#wheelSpinner").removeClass("rotate").animate({opacity:1,marginBottom:0, height:100,width:100,minwidth:100,minHeight:100,maxHeight:100,maxWidth:100,marginBottom:25,marginTop:0},250);
 						$(".wheelSpinnerParents").animate({paddingTop:25},250);
 						$("#results").animate({marginTop:25},250)
 					}, 800);
 					//$("#spinnerButton").delay(800).animate({opacity:1},300);
 					window.setTimeout(function () {
+						displayed = true;
 				    	$("#spinnerButton").attr("shown","true");//.text("You should go to:").removeAttr("id");
 				    	window.setTimeout(function () {
-					    	$("#subResults").css({height:$("html").height() - $(".wheelSpinnerParents").height()}).slideDown();//.animate({display:"block",height:"100%"},1000);
+					    	$("#subResults").slideDown();//.animate({display:"block",height:"100%"},1000);
 					    }, 1000);
 					}, 1000);
 				}
-		}
+		}/*
 		(function(){
 			var degRot = 328;
 			setInterval(function() { 
 				$("body").css({"background":"linear-gradient(" + degRot + "deg, rgba(34,195,87,1) 0%, rgba(253,113,45,1) 100%"});
 				degRot++;
 			}, 50);
-		})();
+		})();*/
 	</script>
 </body>
 </html>
