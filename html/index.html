@@ -8,6 +8,7 @@
 	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="jquery-ui.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Wheel</title>
 </head>
 <body>
 	<div id="overlay"></div>
@@ -22,18 +23,18 @@
 		<table class="optionField">
 			<thead><tr><td colspan="2" align="center"><h3 class="optionFieldHeading">Category:</h3></td></tr></thead>
 			<tr>
-				<td width="50%"><div class="toggle"><label for="pub" id="1">Pub<input type="checkbox" name="type" value="pub" id="pub" /></label></div></td>
-				<td><div class="toggle"><label for="club" id="2">Club<input type="checkbox" name="type" value="club" id="club" /></label></div></td>
+				<td width="50%"><div class="toggle"><label for="pub" id="type1">Pub<input type="checkbox" name="type1" value="pub" id="pub" /></label></div></td>
+				<td><div class="toggle"><label for="club" id="2">Club<input type="checkbox" name="type2" value="club" id="club" /></label></div></td>
 			</tr>
 			<tr>
-				<td><div class="toggle"><label for="grub" id="3">Grub<input type="checkbox" name="type" value="grub" id="grub" /></label></div></td>
-				<td><div class="toggleAll"><label for="all">Suprise<input type="checkbox" name="type" value="all" id="all"></label></div></td>
+				<td><div class="toggle"><label for="grub" id="3">Grub<input type="checkbox" name="type3" value="grub" id="grub" /></label></div></td>
+				<td><div class="toggleAll"><label for="all">Suprise<input type="checkbox" name="type4" value="all" id="all"></label></div></td>
 			</tr>
 		</table>
 		<table class="optionField">
 			<thead><tr><td colspan="2" align="center"><h3 class="optionFieldHeading"><br>Distance:</h3></td></tr></thead>
 			<tr>
-				<td width="50%"><div class="toggleDist"><label for="1k" id="1k">1k<input type="radio" name="distance" value="1k" id="1k" /></label></div></td>
+				<td width="50%"><div class="toggleDist checked"><label for="1k" id="1k">1k<input type="radio" name="distance" value="1k" id="1k" checked="checked" /></label></div></td>
 				<td><div class="toggleDist"><label for="3k" id="2">3k<input type="radio" name="distance" value="3k" id="3k" /></label></div></td>
 			</tr>
 			<tr>
@@ -65,16 +66,16 @@
 											<td><table width="100%">
 												<tr>
 													<td>
-														<i class="fa fa-thumbs-up ratingButton"></i>
+														<i class="fa fa-thumbs-up ratingButton" id="goodChoiceButton"></i>
 													</td>
 													<td>
-														<i class="fa fa-thumbs-down ratingButton"></i>
+														<i class="fa fa-thumbs-down fa-flip-horizontal ratingButton" id="badChoiceButton"></i>
 													</td>
 												</tr>
 											</table></td>
 										</tr>
 										<tr>
-											<td><div class="emergencyButton">Emergency</div></td>
+											<td><div class="emergencyButton"><a href="emergency.html" style="text-decoration: none;color:#ffffff">Emergency</a></div></td>
 										</tr>
 									</table>
 								</div>
@@ -88,7 +89,26 @@
 	<script type="text/javascript">
 		var displayed = false;
 		$("#overlay").slideUp(300);
-		document.getElementById("wheelSpinner").onclick = function() { if (displayed){ $("#overlay").show('slide', { direction: "down" }, 1000);window.setTimeout(function () {location.reload();},1000) } else { document.getElementById("wheelSpinner").classList.toggle("rotate"); displayResults() }};
+		document.getElementById("badChoiceButton").onclick = function() { $("#overlay").show('slide', { direction: "down" }, 1000);window.setTimeout(function () {window.location.href = "bad.html";},1000)};
+		document.getElementById("wheelSpinner").onclick = document.getElementById("goodChoiceButton").onclick = function() { if (displayed){ $("#overlay").show('slide', { direction: "down" }, 1000);window.setTimeout(function () {location.reload();},1000) } else {
+			var selection = []
+			if ($("#pub").is(":checked")){
+				selection.push("pub");
+			}
+			if ($("#club").is(":checked")){
+				selection.push("club");
+			}
+			if ($("#grub").is(":checked")){
+				selection.push("grub");
+			}
+			if ($("#all").is(":checked")){
+				selection = ["pub","club","grub"];
+			}
+			if(selection.length == 0)
+			{
+				return alert("Please select a location category!");
+			}
+			document.getElementById("wheelSpinner").classList.toggle("rotate"); displayResults() }};
 		window.setTimeout(function () {$("#wheelSpinner").animate({maxHeight:"60vw",maxWidth:"60vw",width:"60vw",height:"60vw",marginTop:"12vh"},250);},700);
 		var clickCount = 0;
 		$(".toggle").click(function(){
@@ -143,7 +163,7 @@
 					$("#wheelSpinner").css({minwidth:0,minHeight:0,marginBottom:50}).animate({height:60,width:0,opacity:0.3,marginTop:0},250);
 					$("#results, #subResults").hide();
 					$("#results").delay(900).fadeIn(1500);
-					$("#results").delay(100).animate({marginTop:0,marginTop:50,display:"block"},375);
+					$("#results").delay(100).animate({marginTop:0,marginTop:50,display:"block",borderTopLeftRadius:"30px",borderTopRightRadius:"30px"},375);
 					$("#spinnerButton").delay(800).animate({opacity:0},200);
 					window.setTimeout(function () {
 						$("#spinnerButton").slideUp();

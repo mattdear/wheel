@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wheel</title>
+	<link rel="stylesheet" type="text/css" href="css/wheel.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="jquery-ui.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Emergency | Wheel</title>
+</head>
+<body>
+	<div id="overlay" style="display: none;"></div>
+	<center id="logo">
+		<div class="wheelSpinnerParents" style="padding-top: 25px;">
+			<div style="padding-top: 20px">
+				<div class="wheelSpinner" id="wheelSpinner" style="max-height: 100px; max-width: 100px; width: 100px; height: 100px; margin-top: 0px; min-height: 100px; margin-bottom: 25px; opacity: 1;"></div>
+			</div>
+		</div>
+	</center>
+	<div class="emergencyPanel">
+		<table width="100%" height="100%">
+			<tr>
+				<td align="center">
+					<h2 class="resultsPlaceName" style="font-size: 5vh">Safe location</h2>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<img src="img/Crown.png" style="max-width: 90%;border-radius: 4px">
+				</td>
+			</tr>
+			<tr>
+				<td valign="bottom" style="padding-bottom: 40px">
+					<table width="100%">
+						<tr>
+							<td align="center">
+								<p style="font-size: x-large">Get to a safe location:</p>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<a id="safeButton" style="cursor:pointer;text-decoration: none" class="fa fa-thumbs-up ratingButton smallButton emergencyButtons emergencyButtonsGood"> I am safe now</a>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<a href="tel:999" style="text-decoration: none" class="fa fa-shield ratingButton smallButton emergencyButtons emergencyButtonsBad"> Call police</a>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script type="text/javascript">
+		document.getElementById("wheelSpinner").onclick = document.getElementById("safeButton").onclick = function() { $("#overlay").show('slide', { direction: "down" }, 1000);window.setTimeout(function () {window.location.href  = "index.html";},1000)};
+		$(".emergencyPanel").height($("html").height() - $("#logo").height() - parseInt($("#logo").children().css("marginBottom"),10) - parseInt($("#logo").children().css("paddingTop"),10)+6);
+	</script>
+</html>

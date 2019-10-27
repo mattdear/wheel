@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wheel</title>
+	<link rel="stylesheet" type="text/css" href="css/wheel.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="jquery-ui.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Review suggestion | Wheel</title>
+</head>
+<body>
+	<div id="overlay"></div>
+	<center id="logo">
+		<div class="wheelSpinnerParents" style="padding-top: 25px;">
+			<div style="padding-top: 20px">
+				<div class="wheelSpinner" id="wheelSpinner" style="max-height: 100px; max-width: 100px; width: 100px; height: 100px; margin-top: 0px; min-height: 100px; margin-bottom: 25px; opacity: 1;"></div>
+			</div>
+		</div>
+	</center>
+	<div class="reviewPanel">
+		<table width="100%" height="100%">
+			<tr>
+				<td align="center">
+					<h2 class="resultsPlaceName" style="font-size: 5vh;padding-bottom: 0px;margin-bottom: 0px">The Crown</h2>
+				</td>
+			</tr>
+			<tr>
+				<td align="center" valign="top" style="padding-bottom: 40px">
+					<table width="100%">
+						<tr>
+							<td align="center">
+								<button class="optionButton" href="index.html" style="cursor:pointer;text-decoration: none">Did not like the suggestion</button><br><br>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<button class="optionButton" href="emergency.html" style="cursor:pointer;text-decoration: none">Venue does not feel safe</button><br><br>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<button class="optionButton" href="emergency.html" style="cursor:pointer;text-decoration: none">Area does not feel safe</button><br><br>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<button class="optionButton" href="index.html" style="cursor:pointer;text-decoration: none">Venue doesn't exist</button><br><br>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<button class="optionButton" href="index.html" style="cursor:pointer;text-decoration: none">Venue is not correctly listed</button>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td valign="bottom">
+					<a href="#" style="text-decoration: none;cursor:pointer;font-size: large;padding-left: 5px" id="backToHome"> &larr; Go Back</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script type="text/javascript">
+		$("#overlay").slideUp(300);
+		document.getElementById("wheelSpinner").onclick = document.getElementById("backToHome").onclick = function() { $("#overlay").show('slide', { direction: "down" }, 1000); window.setTimeout(function () {window.location.href="index.html"},1000);};
+		document.getElementById("wheelSpinner").onclick = function() { $("#overlay").show('slide', { direction: "down" }, 1000);window.setTimeout(function () {window.location.href  = "index.html";},1000)};
+		$(".reviewPanel").height($("html").height() - $("#logo").height() - parseInt($("#logo").children().css("marginBottom"),10) - parseInt($("#logo").children().css("paddingTop"),10)+6);
+	</script>
+</html>
