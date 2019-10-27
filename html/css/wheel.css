@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Jomolhari&display=swap');
 html, body {
 	padding: 0px;
 	margin: 0px;
 	background: #d4e6ef;/*rgb(34,195,87);*/
 	/*background: linear-gradient(328deg, rgba(34,195,87,1) 0%, rgba(253,113,45,1) 100%);*/
 	min-height: 100vh;
-	font-family: arial;
+	font-family: 'Lexend Deca', sans-serif;
 	overflow-y: hidden;
 }
 @media (max-width : 320px) {
@@ -12,6 +14,16 @@ html, body {
 		font-family: large;
 	}
 
+}
+html.readability > *, html.readability button, html.readability input {
+	font-family: 'Jomolhari', serif !important;
+}
+html.bigfont > *, html.bigfont button, html.bigfont input, html.bigfont h2  {
+	font-size: xx-large !important;
+}
+
+html.smallfont > *, html.smallfont button, html.smallfont input, html.smallfont h2 {
+	font-size: large !important;
 }
 div.search > button {
 	background: #eaeaea;
@@ -69,6 +81,10 @@ h2 {
 }
 .resultsPlaceName{
 	margin: 3vh 0px;
+	color: #011f4b;
+}
+.base {
+	color: #011f4b;
 }
 .ratingButton, .emergencyButton {
 	width: 91%;
@@ -82,6 +98,9 @@ h2 {
 	color: darkred;
 	padding-top: 1vh;
 	cursor: pointer;
+}
+.emergencyButton {
+	padding-bottom: 15px !important;
 }
 .fa-thumbs-up {
 	color: darkgreen;
@@ -115,13 +134,16 @@ h2 {
 	height: 4vh;
 	font-size: x-large;
 	border-radius: 8px;
-	padding-top: 10px;
+	padding: 10px 0px;
 	text-align: center;
-	background-color: #b3e4ff;
-	border: 1px solid #eee;
+	background-color: #ffffff;
+	color:#005b96;
+	border: 1px solid #005b96;
 }
-.toggle.checked, .toggleAll.checked, .toggleDist.checked, .optionButton:hover {
-	background-color: #5ab1e1 !important;
+.toggle.checked, .toggleAll.checked, .toggleDist.checked, .optionButton.checked, .badSubmit {
+	background-color: #005b96 !important;
+	color:#ffffff;
+	border: 1px solid #ffffff;
 }
 .optionButton {
 	height: 6.1vh;
@@ -133,6 +155,7 @@ h2 {
 }
 .optionFieldHeading {
 	margin: 0px;
+	color: #011f4b;
 }
 .emergencyPanel, .reviewPanel {
 	background-color: #ffffff;
@@ -145,10 +168,15 @@ h2 {
 	color: #ffffff !important;
 	height:4vh!important;
 	padding-bottom: 10px;
+	border: 6px solid red;
+}
+.emergencyButtons > span {
+	font-family: 'Lexend Deca', sans-serif !important;
 }
 .emergencyButtonsGood {
 	background-color: green;
 	margin: 0px;
+	border: 6px solid green !important;
 }
 .emergencyButtonsBad {
 	background-color: red;
@@ -159,4 +187,7 @@ h2 {
 }
 .optionButton {
 	font-size: 3vh;
+}
+.badButtonCheck {
+	display: none;
 }

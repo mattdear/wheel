@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wheel</title>
+	<link rel="stylesheet" type="text/css" href="css/wheel.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="jquery-ui.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Accessibility | Wheel</title>
+</head>
+<body>
+	<div id="overlay"></div>
+	<center id="logo">
+		<div class="wheelSpinnerParents" style="padding-top: 25px;">
+			<div style="padding-top: 20px">
+				<div class="wheelSpinner" id="wheelSpinner" style="max-height: 100px; max-width: 100px; width: 100px; height: 100px; margin-top: 0px; min-height: 100px; margin-bottom: 25px; opacity: 1;"></div>
+			</div>
+		</div>
+	</center>
+	<div class="reviewPanel">
+		<table width="100%" height="100%">
+			<tr>
+				<td align="center">
+					<h2 class="resultsPlaceName" style="font-size: 5vh;padding-bottom: 0px;margin-bottom: 20px">Accessibility</h2>
+				</td>
+			</tr>
+			<tr>
+				<td align="center" valign="top" style="padding-bottom: 40px">
+					<table width="100%">
+						<tr>
+							<td align="center" style="padding-bottom: 15px">
+								<label for="ifs" id="ifs_b" href="index.html" style="cursor:pointer;text-decoration: none"><button class="optionButton">Increase font size<input type="checkbox" name="ifs" id="ifs" value="ifs" class="badButtonCheck"></button></label><br>
+							</td>
+						</tr>
+						<tr>
+							<td align="center" style="padding-bottom: 15px">
+								<label for="dfs" id="dfs_b" href="emergency.html" style="cursor:pointer;text-decoration: none"><button class="optionButton">Decrease font size<input type="checkbox" name="dfs" id="dfs" value="dfs" class="badButtonCheck"></button></label><br>
+							</td>
+						</tr>
+						<tr>
+							<td align="center" style="padding-bottom: 15px">
+								<label for="cf" id="cf_b" href="emergency.html" style="cursor:pointer;text-decoration: none"><button class="optionButton">Change font<input type="checkbox" name="cf" id="cf" value="cf" class="badButtonCheck"></button></label><br>
+							</td>
+						</tr>
+						<tr>
+							<td align="center"style="padding-bottom: 15px">
+								<label for="hc1" id="hc1_b" href="index.html" style="cursor:pointer;text-decoration: none"><button class="optionButton">High contrast (1)<input type="checkbox" name="hc1" id="hc1" value="hc1" class="badButtonCheck"></button></label><br>
+							</td>
+						</tr>
+						<tr>
+							<td align="center" style="padding-bottom: 15px">
+								<label for="hc2" id="hc2_b" href="index.html" style="cursor:pointer;text-decoration: none;"><button class="optionButton">High contrast (2)<input type="checkbox" name="hc2" id="hc2" value="hc2" class="badButtonCheck"></button></label><br><br><br>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
+								<input type="submit" class="optionButton badSubmit" id="submit" href="index.html" style="cursor:pointer;text-decoration: none;" value="Back"/ >
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script type="text/javascript">
+		$("#overlay").slideUp(300);
+		document.getElementById("wheelSpinner").onclick = document.getElementById("submit").onclick = function() { $("#overlay").show('slide', { direction: "down" }, 1000); window.setTimeout(function () {window.location.href="index.html"},1000);};
+		$(".reviewPanel").height($("html").height() - $("#logo").height() - parseInt($("#logo").children().css("marginBottom"),10) - parseInt($("#logo").children().css("paddingTop"),10)+6);
+		$("#cf_b").click(function() {
+			if($("#cf_b").hasClass("checked")) {
+				$("#cf_b").removeClass("checked");
+				$("html").removeClass("readability");
+			}
+			else
+			{
+				$("#cf_b").addClass("checked");
+				$("html").addClass("readability");
+			}
+		});
+		$("#ifs_b").click(function() {
+			if($("#ifs_b").hasClass("checked")) {
+				$("#ifs_b").removeClass("checked");
+				$("html").removeClass("bigfont");
+			}
+			else
+			{
+				$("#ifs_b").addClass("checked");
+				$("html").addClass("bigfont").removeClass("smallfont");
+				$("#dfs_b, #dfs_b > button, #dfs_b > button > input").removeClass("checked").prop("checked",false);
+			}
+		});
+		$("#dfs_b").click(function() {
+			if($("#dfs_b").hasClass("checked")) {
+				$("#dfs_b").removeClass("checked");
+				$("html").removeClass("smallfont");
+			}
+			else
+			{
+				$("#dfs_b").addClass("checked");
+				$("html").addClass("smallfont").removeClass("bigfont");
+				$("#ifs_b, #ifs_b > button, #ifs_b > button > input").removeClass("checked").prop("checked",false);
+			}
+		});
+	</script>
+</html>
