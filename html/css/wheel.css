@@ -7,7 +7,6 @@ html, body {
 	/*background: linear-gradient(328deg, rgba(34,195,87,1) 0%, rgba(253,113,45,1) 100%);*/
 	min-height: 100vh;
 	font-family: 'Lexend Deca', sans-serif;
-	overflow-y: hidden;
 }
 @media (max-width : 320px) {
 	* {
